@@ -31,6 +31,11 @@ public class App {
 			switch (opcion) {
 			case 1:
 
+
+				break;
+
+			case 2:
+
 				break;
 
 			default:
@@ -45,7 +50,7 @@ public class App {
 
 	public static void mostrarMenu(){
 		System.out.println("------Opciones de menu------");
-		System.out.println("1 - ");
+		System.out.println("1 - hacer tal cosa");
 		System.out.println("2 - ");
 		System.out.println("3 -");
 		System.out.println("4 -");
