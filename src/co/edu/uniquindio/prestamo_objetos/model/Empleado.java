@@ -8,6 +8,7 @@ public class Empleado {
 	private String correo;
 	private int aniosExperiencia;
 
+
 	//Constructor
 	public Empleado(String nombre, String codigo, String correo, int aniosExperiencia) {
 		super();
@@ -57,6 +58,7 @@ public class Empleado {
 		return "Empleado [nombre=" + nombre + ", codigo=" + codigo + ", correo=" + correo + ", aniosExperiencia="
 				+ aniosExperiencia + "]";
 	}
+	
 
 
 

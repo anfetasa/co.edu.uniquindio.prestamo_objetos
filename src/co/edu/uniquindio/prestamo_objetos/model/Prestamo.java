@@ -8,6 +8,7 @@ public class Prestamo {
 	private int diasTranscurridos;
 	private double valor;
 
+
 	//constructor
 
 	public Prestamo(String codigo, int diasSolicitados, int diasTranscurridos, double valor) {

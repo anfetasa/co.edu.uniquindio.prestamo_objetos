@@ -1,5 +1,9 @@
 package co.edu.uniquindio.prestamo_objetos.aplicacion;
 import co.edu.uniquindio.prestamo_objetos.model.metodosImpresiones;
+import java.time.temporal.JulianFields;
+
+import javax.swing.JOptionPane;
+
 import co.edu.uniquindio.prestamo_objetos.model.Cliente;
 import co.edu.uniquindio.prestamo_objetos.model.DetallePrestamo;
 import co.edu.uniquindio.prestamo_objetos.model.Empleado;
@@ -17,6 +21,8 @@ public class App {
 
 
 		int opcion = 0;
+
+
 		TipoDocumento tipoDocuemento= null;
 
 		Empresa empresa = new Empresa("Empresa uni", "123");
@@ -29,8 +35,22 @@ public class App {
 			//opcion de casos
 
 			switch (opcion) {
+
+
+			/*
+			 * Responsable: Andres Taborda
+			 * Ejercicio 1 : crear 3 empleados
+			 * */
 			case 1:
 
+				String nombreEmpleado = metodosImpresiones.leerStringVentana("Ingrese el nombre del empleado");
+				String codigoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el codigo del empleado");
+				String correoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el correo del empleado");
+				int aniosExperienciaEmpleado = metodosImpresiones.leerEnteroVentana("Ingrese los años de experiencia del empleado");
+
+				String empleado = empresa.agregarEmpleados(nombreEmpleado, codigoEmpleado, correoEmpleado, aniosExperienciaEmpleado);
+
+				JOptionPane.showMessageDialog(null, empleado);
 
 				break;
 
@@ -55,7 +75,7 @@ public class App {
 
 	public static void mostrarMenu(){
 		System.out.println("------Opciones de menu------");
-		System.out.println("1 - hacer tal cosa");
+		System.out.println("1 - Crear un nuevo empleado");
 		System.out.println("2 - ");
 		System.out.println("3 -");
 		System.out.println("4 -");

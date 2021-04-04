@@ -1,5 +1,7 @@
 package co.edu.uniquindio.prestamo_objetos.model;
 
+
+
 public class Empresa {
 
 	//astributos de la clase
@@ -122,6 +124,47 @@ public class Empresa {
 				+ empleado3 + ", cliente1=" + cliente1 + ", cliente2=" + cliente2 + ", cliente3=" + cliente3
 				+ ", objeto1=" + objeto1 + ", objeto2=" + objeto2 + ", objeto3=" + objeto3 + "]";
 	}
+
+	/**
+	 * Metod agregarEmpleados
+	 * Responsable: andres taborda
+	 * ejercicio: 1
+	 *
+	 * @param nombre
+	 * @param codigo
+	 * @param correo
+	 * @param aniosExperiencia
+	 *
+	 * @return
+	 *
+	 */
+
+	public String agregarEmpleados(String nombre, String codigo, String correo, int aniosExperiencia){
+
+		if(empleado1 == null){
+			empleado1 = new Empleado(nombre, codigo , correo , aniosExperiencia);
+
+			return "Empleado 1 creado con exito";
+		}else{
+			if(empleado2 == null){
+				empleado2 = new Empleado(nombre, codigo , correo , aniosExperiencia);
+
+				return "Empleado 2 creado con exito";
+			}else{
+				if(empleado3 == null){
+					empleado3 = new Empleado(nombre, codigo , correo , aniosExperiencia);
+
+					return "Empleado 3 creado con exito";
+				}else{
+					return "Ya existen los 3 empleados posibles creados";
+				}
+			}
+		}
+
+	}
+
+
+
 
 
 
