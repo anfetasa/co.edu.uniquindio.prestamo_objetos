@@ -79,6 +79,17 @@ public class App {
 
 			case 3:
 
+				String nombre = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto");
+				String codigo= metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto");
+				int unidadesDisponibles = metodosImpresiones.leerEnteroVentana("Ingrese las unidades disponibles del objeto");
+				String estado = metodosImpresiones.leerStringVentana("Ingrese el estado del Objeto:\n d- Disponible\n nd- No Disponible ");
+			    double precioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del objeto:");
+
+
+			    String objeto = empresa.crearObjeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+
+				JOptionPane.showMessageDialog(null, objeto);
+
 				break;
 
 
@@ -127,7 +138,7 @@ public class App {
 		System.out.println("------Opciones de menu------");
 		System.out.println("1 - Crear un nuevo empleado");
 		System.out.println("2 - Crear un nuevo Cliente ");
-		System.out.println("3 -");
+		System.out.println("3 - Crear un nuevo objeto");
 		System.out.println("4 -");
 		System.out.println("5 -");
 		System.out.println("6 -");

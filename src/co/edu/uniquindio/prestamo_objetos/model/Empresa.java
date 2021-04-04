@@ -183,6 +183,32 @@ public class Empresa {
 			}
 		}
 
+	public String crearObjeto (String nombre, String codigo, int unidadesDisponibles, String estado, double precioAlquiler){
+
+		if(objeto1 == null){
+			objeto1 = new Objeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+
+			return "Objeto 1 creado con exito";
+		}else{
+			if(objeto2 == null){
+				objeto2= new Objeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+
+				return "Objeto 2 creado con exito";
+			}else{
+				if (objeto3 == null){
+					objeto3= new Objeto(nombre,codigo,unidadesDisponibles,estado,precioAlquiler);
+
+					return "Objeto 3 creado con exito";
+
+
+				}else{
+					return "Ya existen los 3 objetos posibles a crear";
+				}
+
+			  }
+		   }
+		}
+
 	}
 
 
