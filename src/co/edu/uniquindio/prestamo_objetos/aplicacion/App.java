@@ -1,5 +1,7 @@
 package co.edu.uniquindio.prestamo_objetos.aplicacion;
 import co.edu.uniquindio.prestamo_objetos.model.metodosImpresiones;
+import co.edu.uniquindio.programajugueteria.model.TipoJuguete;
+
 import java.time.temporal.JulianFields;
 
 import javax.swing.JOptionPane;
@@ -53,8 +55,25 @@ public class App {
 				JOptionPane.showMessageDialog(null, empleado);
 
 				break;
-
+            /*
+             * Responsable: Juan Giraldo
+             * Ejercicio 2 : crear 2 clientes
+             */
 			case 2:
+
+
+				String documentoCliente = metodosImpresiones.leerStringVentana("Ingrese el documento del cliente");
+				String nombreCliente = metodosImpresiones.leerStringVentana("Ingrese el nombre del cliente");
+				String generoCliente = metodosImpresiones.leerStringVentana("Ingrese el genero del cliente");
+				String ciudadResidenciaCliente = metodosImpresiones.leerStringVentana("Ingrese la ciudad de residencia del cliente");
+			    int valorTipo = metodosImpresiones.leerEnteroVentana("Ingrese el tipo de documento: \n 0- Cedula\n 1- Pasaporte\n 2- Cedula Extrangera ");
+
+
+			    TipoDocumento tipoDocumento = verificarDocumentoIngresado(valorTipo);
+
+			    String cliente = empresa.agregarClientes(documentoCliente,nombreCliente,generoCliente,ciudadResidenciaCliente,tipoDocumento);
+
+				JOptionPane.showMessageDialog(null, cliente);
 
 				break;
 
@@ -70,13 +89,44 @@ public class App {
 		}while(opcion != 15);
 	}
 
+	/**
+	 * Metod verificarDocumentoIngresado
+	 * Responsable: Juan David Giraldo
+	 * @param valorTipo
+	 *
+	 * @return
+	 */
+
+	private static TipoDocumento verificarDocumentoIngresado(int valorTipo) {
+
+		TipoDocumento tipoDocumento = null;
+
+
+		if(valorTipo == TipoDocumento.CEDULA.getNumTipo()){
+			tipoDocumento = TipoDocumento.CEDULA;
+		}else{
+			if(valorTipo == TipoDocumento.PASAPORTE.getNumTipo()){
+				tipoDocumento= TipoDocumento.PASAPORTE;
+			}else{
+				if(valorTipo == TipoDocumento.CEDULA_EXTRANGERA.getNumTipo()){
+					tipoDocumento= TipoDocumento.CEDULA_EXTRANGERA;
+				}else{
+					JOptionPane.showMessageDialog(null, "tipo de Documento no valido");
+				}
+
+			}
+		}
+
+		return tipoDocumento;
+	}
+
 
 	//metodo del menu de opciones
 
 	public static void mostrarMenu(){
 		System.out.println("------Opciones de menu------");
 		System.out.println("1 - Crear un nuevo empleado");
-		System.out.println("2 - ");
+		System.out.println("2 - Crear un nuevo Cliente ");
 		System.out.println("3 -");
 		System.out.println("4 -");
 		System.out.println("5 -");

@@ -164,6 +164,26 @@ public class Empresa {
 	}
 
 
+	public String agregarClientes (String documento, String nombre, String genero, String ciudadResidencia,TipoDocumento tipoDocumento){
+
+		if(cliente1 == null){
+			cliente1 = new Cliente(documento, nombre, genero, ciudadResidencia,tipoDocumento);
+
+			return "Cliente 1 creado con exito";
+		}else{
+			if(cliente2 == null){
+				cliente2 = new Cliente(documento, nombre, genero, ciudadResidencia,tipoDocumento);
+
+				return "Cliente 2 creado con exito";
+			}else{
+
+
+					return "Ya existen los 2 clientes posibles a crear";
+				}
+			}
+		}
+
+	}
 
 
 
@@ -174,4 +194,6 @@ public class Empresa {
 
 
 
-}
+
+
+
