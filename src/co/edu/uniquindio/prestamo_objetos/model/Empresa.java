@@ -164,6 +164,21 @@ public class Empresa {
 	}
 
 
+	/**
+	 * Metod: agregarClientes
+	 * Responsable: Juan Giraldo
+	 * Ejercicio 2
+	 *
+	 *
+	 * @param documento
+	 * @param nombre
+	 * @param genero
+	 * @param ciudadResidencia
+	 * @param tipoDocumento
+	 * @return
+	 */
+
+
 	public String agregarClientes (String documento, String nombre, String genero, String ciudadResidencia,TipoDocumento tipoDocumento){
 
 		if(cliente1 == null){
@@ -183,6 +198,20 @@ public class Empresa {
 			}
 		}
 
+
+
+	/**
+	 * Metod: crearObjeto
+	 * Responsable: Juan Giraldo
+	 * Ejercicio 3.1
+	 *
+	 * @param nombre
+	 * @param codigo
+	 * @param unidadesDisponibles
+	 * @param estado
+	 * @param precioAlquiler
+	 * @return
+	 */
 	public String crearObjeto (String nombre, String codigo, int unidadesDisponibles, String estado, double precioAlquiler){
 
 		if(objeto1 == null){
@@ -211,9 +240,11 @@ public class Empresa {
 
 
 	/**
-	 *
+	 * Metod: obtenerObjeto
+	 * Responsable: Juan Giraldo
+	 * Ejercicio 3.2
 	 * @param codigo
-	 * @return
+	 * @return retorna un objeto el cual se obtiene por medio del codigo
 	 */
 
      public Objeto obtenerObjeto(String codigo) {
@@ -238,7 +269,17 @@ public class Empresa {
 	}
 
 
-
+   /**
+    * Metod: reemplazarObjeto
+    * Responsable: Juan Giraldo
+    * Ejercicio 3.5
+    * @param nuevoNombre
+    * @param codigo
+    * @param nuevaUnidadesDisponibles
+    * @param nuevoEstado
+    * @param nuevoPrecioAlquiler
+    * @return
+    */
 
 	public String reemplazarObjeto(String nuevoNombre, String codigo, int nuevaUnidadesDisponibles,
 			String nuevoEstado, double nuevoPrecioAlquiler) {
