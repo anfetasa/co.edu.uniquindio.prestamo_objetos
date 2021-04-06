@@ -5,19 +5,23 @@ public class Prestamo {
 	//atributos de la clase
 	private String codigo;
 	private int diasSolicitados;
-	private int diasTranscurridos;
 	private double valor;
+	private String codigoCliente;
+	private String codigoEmpleado;
 
 
 	//constructor
 
-	public Prestamo(String codigo, int diasSolicitados, int diasTranscurridos, double valor) {
+	public Prestamo(String codigo, int diasSolicitados, double valor, String codigoCliente,
+			String codigoEmpleado) {
 		super();
 		this.codigo = codigo;
 		this.diasSolicitados = diasSolicitados;
-		this.diasTranscurridos = diasTranscurridos;
 		this.valor = valor;
+		this.codigoCliente = codigoCliente;
+		this.codigoEmpleado = codigoEmpleado;
 	}
+
 
 	//getters and setters
 
@@ -36,15 +40,6 @@ public class Prestamo {
 	public void setDiasSolicitados(int diasSolicitados) {
 		this.diasSolicitados = diasSolicitados;
 	}
-
-	public int getDiasTranscurridos() {
-		return diasTranscurridos;
-	}
-
-	public void setDiasTranscurridos(int diasTranscurridos) {
-		this.diasTranscurridos = diasTranscurridos;
-	}
-
 	public double getValor() {
 		return valor;
 	}
@@ -52,13 +47,33 @@ public class Prestamo {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-
-	//ToString
-
-	public String toString() {
-		return "Prestamo [codigo=" + codigo + ", diasSolicitados=" + diasSolicitados + ", diasTranscurridos="
-				+ diasTranscurridos + ", valor=" + valor + "]";
+	public String getCodigoCliente() {
+		return codigoCliente;
 	}
+
+	public void setCodigoCliente(String codigoCliente) {
+		this.codigoCliente = codigoCliente;
+	}
+
+	public String getCodigoEmpleado() {
+		return codigoEmpleado;
+	}
+
+	public void setCodigoEmpleado(String codigoEmpleado) {
+		this.codigoEmpleado = codigoEmpleado;
+	}
+
+
+	//toString
+	public String toString() {
+		return "Prestamo [codigo=" + codigo + ", diasSolicitados=" + diasSolicitados + ", valor=" + valor
+				+ ", codigoCliente=" + codigoCliente + ", codigoEmpleado=" + codigoEmpleado + "]";
+	}
+
+
+
+
+
 
 
 

@@ -1,6 +1,8 @@
 package co.edu.uniquindio.prestamo_objetos.model;
 
+import java.io.Console;
 
+import javax.swing.JOptionPane;
 
 public class Empresa {
 
@@ -19,6 +21,9 @@ public class Empresa {
 	private Objeto objeto1;
 	private Objeto objeto2;
 	private Objeto objeto3;
+	private DetallePrestamo detallePrestamo1;
+	private DetallePrestamo detallePrestamo2;
+	private DetallePrestamo detallePrestamo3;
 
 
 	//constructor
@@ -116,13 +121,39 @@ public class Empresa {
 		this.objeto3 = objeto3;
 	}
 
+	public DetallePrestamo getDetallePrestamo1() {
+		return detallePrestamo1;
+	}
+
+	public void setDetallePrestamo1(DetallePrestamo detallePrestamo1) {
+		this.detallePrestamo1 = detallePrestamo1;
+	}
+
+	public DetallePrestamo getDetallePrestamo2() {
+		return detallePrestamo2;
+	}
+
+	public void setDetallePrestamo2(DetallePrestamo detallePrestamo2) {
+		this.detallePrestamo2 = detallePrestamo2;
+	}
+
+	public DetallePrestamo getDetallePrestamo3() {
+		return detallePrestamo3;
+	}
+
+	public void setDetallePrestamo3(DetallePrestamo detallePrestamo3) {
+		this.detallePrestamo3 = detallePrestamo3;
+	}
+
 	//toString
 
 	public String toString() {
 		return "Empresa [nombre=" + nombre + ", nit=" + nit + ", prestamo1=" + prestamo1 + ", prestamo2=" + prestamo2
 				+ ", prestamo3=" + prestamo3 + ", empleado1=" + empleado1 + ", empleado2=" + empleado2 + ", empleado3="
 				+ empleado3 + ", cliente1=" + cliente1 + ", cliente2=" + cliente2 + ", cliente3=" + cliente3
-				+ ", objeto1=" + objeto1 + ", objeto2=" + objeto2 + ", objeto3=" + objeto3 + "]";
+				+ ", objeto1=" + objeto1 + ", objeto2=" + objeto2 + ", objeto3=" + objeto3 + ", detallePrestamo1="
+				+ detallePrestamo1 + ", detallePrestamo2=" + detallePrestamo2 + ", detallePrestamo3=" + detallePrestamo3
+				+ "]";
 	}
 
 	/**
@@ -162,6 +193,7 @@ public class Empresa {
 		}
 
 	}
+
 
 
 	/**
@@ -212,20 +244,37 @@ public class Empresa {
 	 * @param precioAlquiler
 	 * @return
 	 */
-	public String crearObjeto (String nombre, String codigo, int unidadesDisponibles, String estado, double precioAlquiler){
+	public String crearObjeto (String nombre, String codigo, int unidadesDisponibles, double precioAlquiler){
 
 		if(objeto1 == null){
-			objeto1 = new Objeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+
+			if(unidadesDisponibles > 0){
+				objeto1 = new Objeto(nombre, codigo, unidadesDisponibles, "DISPONIBLE",precioAlquiler);
+			}
+			else{
+				objeto1 = new Objeto(nombre, codigo, unidadesDisponibles, "NO DISPONIBLE",precioAlquiler);
+			}
 
 			return "Objeto 1 creado con exito";
 		}else{
 			if(objeto2 == null){
-				objeto2= new Objeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+				if(unidadesDisponibles > 0){
+					objeto2 = new Objeto(nombre, codigo, unidadesDisponibles, "DISPONIBLE",precioAlquiler);
+				}
+				else{
+					objeto2 = new Objeto(nombre, codigo, unidadesDisponibles, "NO DISPONIBLE",precioAlquiler);
+				}
 
 				return "Objeto 2 creado con exito";
 			}else{
 				if (objeto3 == null){
-					objeto3= new Objeto(nombre,codigo,unidadesDisponibles,estado,precioAlquiler);
+
+					if(unidadesDisponibles > 0){
+						objeto3 = new Objeto(nombre, codigo, unidadesDisponibles, "DISPONIBLE",precioAlquiler);
+					}
+					else{
+						objeto3 = new Objeto(nombre, codigo, unidadesDisponibles, "NO DISPONIBLE",precioAlquiler);
+					}
 
 					return "Objeto 3 creado con exito";
 
@@ -301,8 +350,498 @@ public class Empresa {
 
 	}
 
+	public String crearPrestamo(String codigo, int diasSolicitados, String codigoCliente, String codigoEmpleado, int unidadesPrestadas, String codigoObjeto){
+
+
+		Objeto objeto = obtenerObjeto(codigoObjeto);
+		int unidadesDisponibles = objeto.getUnidadesDisponibles();
+		if(unidadesDisponibles >= unidadesPrestadas){
+
+			if(prestamo1== null){
+				System.out.println("asdas");
+				prestamo1 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+
+				return "Prestamo 1 creado con exito";
+
+			}else{
+				if(prestamo2 == null){
+					prestamo2 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+
+					return "Prestamo 2 creado con exito";
+				}else{
+					if(prestamo3 == null){
+						prestamo3 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+
+						return "Prestamo 3 creado con exito";
+					}else{
+						return "Ya existen los 3 prestamos posibles creados";
+					}
+				}
+			}
+		}else{
+
+			return null;
+		}
+	}
+
+	public String detallePrestamo (String codigoPrestamo, String codigoObjeto, int unidadesPrestadas){
+
+
+		Objeto objeto = obtenerObjeto(codigoObjeto);
+		double sobTotal = objeto.getPrecioAlquiler();
+		int unidadesDisponibles = objeto.getUnidadesDisponibles();
+
+
+
+		try{
+
+
+			if (detallePrestamo1 == null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)&& prestamo1 != null){
+
+
+				if(unidadesDisponibles >= unidadesPrestadas){
+
+
+					detallePrestamo1 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+					unidadesDisponibles -= unidadesPrestadas;
+
+					prestamo1.setValor(sobTotal);
+					if(objeto1 != null){
+						if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+							if(unidadesDisponibles == 0){
+
+								objeto1.setEstado("NO DISPONIBLE");
+							}
+
+							objeto1.setUnidadesDisponibles(unidadesDisponibles);
+						}
+					}
+					if (objeto2 != null){
+						if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+							if(unidadesDisponibles == 0){
+								objeto2.setEstado("NO DISPONIBLE");
+							}
+							objeto2.setUnidadesDisponibles(unidadesDisponibles);
+						}
+					}
+
+					if(objeto3 != null){
+						if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+							if(unidadesDisponibles == 0){
+								objeto3.setEstado("NO DISPONIBLE");
+							}
+							objeto3.setUnidadesDisponibles(unidadesDisponibles);
+						}
+					}
+					return "Agregado Correctamente";
+				}else{
+
+					return "No hay las unidades del producto suficientes para el prestamo";
+				}
+
+			}else{
+				if (detallePrestamo1 == null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo2 != null){
+
+					if(unidadesDisponibles >= unidadesPrestadas){
+						detallePrestamo1 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+						unidadesDisponibles -= unidadesPrestadas;
+						prestamo2.setValor(sobTotal);
+
+						if(objeto1 != null){
+							if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+								if(unidadesDisponibles == 0){
+
+									objeto1.setEstado("NO DISPONIBLE");
+								}
+
+								objeto1.setUnidadesDisponibles(unidadesDisponibles);
+							}
+						}
+						if (objeto2 != null){
+							if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+								if(unidadesDisponibles == 0){
+									objeto2.setEstado("NO DISPONIBLE");
+								}
+								objeto2.setUnidadesDisponibles(unidadesDisponibles);
+							}
+						}
+
+						if(objeto3 != null){
+							if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+								if(unidadesDisponibles == 0){
+									objeto3.setEstado("NO DISPONIBLE");
+								}
+								objeto3.setUnidadesDisponibles(unidadesDisponibles);
+							}
+						}
+						return "Agregado Correctamente";
+					}else{
+						return "No hay las unidades del producto suficientes para el prestamo";
+					}
+
+				}else{
+					if (detallePrestamo1 == null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo3 != null){
+
+						if(unidadesDisponibles >= unidadesPrestadas){
+							detallePrestamo1 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+							unidadesDisponibles -= unidadesPrestadas;
+							prestamo3.setValor(sobTotal);
+
+							if(objeto1 != null){
+								if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+									if(unidadesDisponibles == 0){
+
+										objeto1.setEstado("NO DISPONIBLE");
+									}
+
+									objeto1.setUnidadesDisponibles(unidadesDisponibles);
+								}
+							}
+							if (objeto2 != null){
+								if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+									if(unidadesDisponibles == 0){
+										objeto2.setEstado("NO DISPONIBLE");
+									}
+									objeto2.setUnidadesDisponibles(unidadesDisponibles);
+								}
+							}
+
+							if(objeto3 != null){
+								if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+									if(unidadesDisponibles == 0){
+										objeto3.setEstado("NO DISPONIBLE");
+									}
+									objeto3.setUnidadesDisponibles(unidadesDisponibles);
+								}
+							}
+							return "Agregado Correctamente";
+						}else{
+							return "No hay las unidades del producto suficientes para el prestamo";
+						}
+
+					}else{
+						if (detallePrestamo2 == null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo1 != null){
+
+							if(unidadesDisponibles >= unidadesPrestadas){
+								detallePrestamo2 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+								unidadesDisponibles -= unidadesPrestadas;
+								prestamo1.setValor(sobTotal);
+								if(objeto1 != null){
+									if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+										if(unidadesDisponibles == 0){
+
+											objeto1.setEstado("NO DISPONIBLE");
+										}
+
+										objeto1.setUnidadesDisponibles(unidadesDisponibles);
+									}
+								}
+								if (objeto2 != null){
+									if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+										if(unidadesDisponibles == 0){
+											objeto2.setEstado("NO DISPONIBLE");
+										}
+										objeto2.setUnidadesDisponibles(unidadesDisponibles);
+									}
+								}
+
+								if(objeto3 != null){
+									if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+										if(unidadesDisponibles == 0){
+											objeto3.setEstado("NO DISPONIBLE");
+										}
+										objeto3.setUnidadesDisponibles(unidadesDisponibles);
+									}
+								}
+
+								return "Agregado Correctamente";
+							}else{
+								return "No hay las unidades del producto suficientes para el prestamo";
+							}
+
+						}else{
+							if (detallePrestamo2 == null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo2 != null){
+
+								if(unidadesDisponibles >= unidadesPrestadas){
+									detallePrestamo2 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+									unidadesDisponibles -= unidadesPrestadas;
+									prestamo2.setValor(sobTotal);
+
+									if(objeto1 != null){
+										if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+											if(unidadesDisponibles == 0){
+
+												objeto1.setEstado("NO DISPONIBLE");
+											}
+
+											objeto1.setUnidadesDisponibles(unidadesDisponibles);
+										}
+									}
+									if (objeto2 != null){
+										if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+											if(unidadesDisponibles == 0){
+												objeto2.setEstado("NO DISPONIBLE");
+											}
+											objeto2.setUnidadesDisponibles(unidadesDisponibles);
+										}
+									}
+
+									if(objeto3 != null){
+										if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+											if(unidadesDisponibles == 0){
+												objeto3.setEstado("NO DISPONIBLE");
+											}
+											objeto3.setUnidadesDisponibles(unidadesDisponibles);
+										}
+									}
+									return "Agregado Correctamente";
+								}else{
+									return "No hay las unidades del producto suficientes para el prestamo";
+								}
+
+							}else{
+								if (detallePrestamo2 == null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo3 != null){
+
+									if(unidadesDisponibles >= unidadesPrestadas){
+										detallePrestamo2 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+										unidadesDisponibles -= unidadesPrestadas;
+										prestamo3.setValor(sobTotal);
+
+										if(objeto1 != null){
+											if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+												if(unidadesDisponibles == 0){
+
+													objeto1.setEstado("NO DISPONIBLE");
+												}
+
+												objeto1.setUnidadesDisponibles(unidadesDisponibles);
+											}
+										}
+										if (objeto2 != null){
+											if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+												if(unidadesDisponibles == 0){
+													objeto2.setEstado("NO DISPONIBLE");
+												}
+												objeto2.setUnidadesDisponibles(unidadesDisponibles);
+											}
+										}
+
+										if(objeto3 != null){
+											if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+												if(unidadesDisponibles == 0){
+													objeto3.setEstado("NO DISPONIBLE");
+												}
+												objeto3.setUnidadesDisponibles(unidadesDisponibles);
+											}
+										}
+										return "Agregado Correctamente";
+									}else{
+										return "No hay las unidades del producto suficientes para el prestamo";
+									}
+								}else{
+									if (detallePrestamo3 == null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo1 != null){
+
+										if(unidadesDisponibles >= unidadesPrestadas){
+											detallePrestamo3 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+											unidadesDisponibles -= unidadesPrestadas;
+											prestamo1.setValor(sobTotal);
+
+											if(objeto1 != null){
+												if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+													if(unidadesDisponibles == 0){
+
+														objeto1.setEstado("NO DISPONIBLE");
+													}
+
+													objeto1.setUnidadesDisponibles(unidadesDisponibles);
+												}
+											}
+											if (objeto2 != null){
+												if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+													if(unidadesDisponibles == 0){
+														objeto2.setEstado("NO DISPONIBLE");
+													}
+													objeto2.setUnidadesDisponibles(unidadesDisponibles);
+												}
+											}
+
+											if(objeto3 != null){
+												if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+													if(unidadesDisponibles == 0){
+														objeto3.setEstado("NO DISPONIBLE");
+													}
+													objeto3.setUnidadesDisponibles(unidadesDisponibles);
+												}
+											}
+											return "Agregado Correctamente";
+										}else{
+											return "No hay las unidades del producto suficientes para el prestamo";
+										}
+									}else{
+										if (detallePrestamo3 == null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo2 != null){
+
+											if(unidadesDisponibles >= unidadesPrestadas){
+												detallePrestamo3 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+												unidadesDisponibles -= unidadesPrestadas;
+												prestamo2.setValor(sobTotal);
+
+												if(objeto1 != null){
+													if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+														if(unidadesDisponibles == 0){
+
+															objeto1.setEstado("NO DISPONIBLE");
+														}
+
+														objeto1.setUnidadesDisponibles(unidadesDisponibles);
+													}
+												}
+												if (objeto2 != null){
+													if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+														if(unidadesDisponibles == 0){
+															objeto2.setEstado("NO DISPONIBLE");
+														}
+														objeto2.setUnidadesDisponibles(unidadesDisponibles);
+													}
+												}
+
+												if(objeto3 != null){
+													if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+														if(unidadesDisponibles == 0){
+															objeto3.setEstado("NO DISPONIBLE");
+														}
+														objeto3.setUnidadesDisponibles(unidadesDisponibles);
+													}
+												}
+												return "Agregado Correctamente";
+											}else{
+												return "No hay las unidades del producto suficientes para el prestamo";
+											}
+										}else{
+											if (detallePrestamo3 == null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo) && prestamo3 != null){
+
+												if(unidadesDisponibles >= unidadesPrestadas){
+													detallePrestamo3 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+													unidadesDisponibles -= unidadesPrestadas;
+													prestamo3.setValor(sobTotal);
+
+													if(objeto1 != null){
+														if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+
+															if(unidadesDisponibles == 0){
+
+																objeto1.setEstado("NO DISPONIBLE");
+															}
+
+															objeto1.setUnidadesDisponibles(unidadesDisponibles);
+														}
+													}
+													if (objeto2 != null){
+														if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+
+															if(unidadesDisponibles == 0){
+																objeto2.setEstado("NO DISPONIBLE");
+															}
+															objeto2.setUnidadesDisponibles(unidadesDisponibles);
+														}
+													}
+
+													if(objeto3 != null){
+														if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+															if(unidadesDisponibles == 0){
+																objeto3.setEstado("NO DISPONIBLE");
+															}
+															objeto3.setUnidadesDisponibles(unidadesDisponibles);
+														}
+													}
+													return "Agregado Correctamente";
+												}else{
+													return "No hay las unidades del producto suficientes para el prestamo";
+												}
+											}else{
+												return "No se pueden adicionar mas objetos";
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		catch(Exception e){
+			return "error";
+		}
 
 	}
+
+	public DetallePrestamo consultarDetallePrestamo( String codigoPrestamo){
+
+		DetallePrestamo detallePrestamo = null;
+		if( detallePrestamo1 != null && detallePrestamo1.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+			detallePrestamo = detallePrestamo1;
+			return detallePrestamo;
+		}
+		if( detallePrestamo2 != null && detallePrestamo1.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+			detallePrestamo = detallePrestamo1;
+			return detallePrestamo;
+		}
+		return detallePrestamo;
+	}
+
+	public Prestamo consultarPrestamo(String codigoPrestamo){
+
+
+		Prestamo prestamo= null;
+
+		if( prestamo1 != null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+
+			JOptionPane.showMessageDialog(null, consultarDetallePrestamo(codigoPrestamo));
+			prestamo = prestamo1;
+			return prestamo;
+		}
+		if( prestamo2 != null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+
+			JOptionPane.showMessageDialog(null, consultarDetallePrestamo(codigoPrestamo));
+			prestamo = prestamo2;
+			return prestamo;
+		}
+		if( prestamo3 != null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+
+			JOptionPane.showMessageDialog(null, consultarDetallePrestamo(codigoPrestamo));
+			prestamo = prestamo3;
+			return prestamo;
+		}
+		return prestamo;
+	}
+
+
+}
 
 
 

@@ -83,11 +83,10 @@ public class App {
 				String nombre = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto");
 				String codigo= metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto");
 				int unidadesDisponibles = metodosImpresiones.leerEnteroVentana("Ingrese las unidades disponibles del objeto");
-				String estado = metodosImpresiones.leerStringVentana("Ingrese el estado del Objeto:\n -Disponible\n -No Disponible ");
 			    double precioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del alquiler del objeto:");
 
 
-			    String objeto = empresa.crearObjeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
+			    String objeto = empresa.crearObjeto(nombre, codigo, unidadesDisponibles,precioAlquiler);
 
 				JOptionPane.showMessageDialog(null, objeto);
 
@@ -129,6 +128,41 @@ public class App {
 
 				JOptionPane.showMessageDialog(null, mensaje);
 
+			case 8:
+
+				String codigoPrestamo = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
+				int diasSolicitados = metodosImpresiones.leerEnteroVentana("Ingrese la cantidad de dias solicitados del prestamo");
+				String documentoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el documento del empleado que esta realizando el prestamo");
+				String documentoCliente1 = metodosImpresiones.leerStringVentana("Ingrese el documento del cliente al que se le realiza el prestamo");
+				String codigoObjeto = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto que desee");
+				int unidadesPrestadas = metodosImpresiones.leerEnteroVentana("Ingrese la cantidad de unidades solicitadas del objeto");
+				String mensaje1 = empresa.crearPrestamo(codigoPrestamo, diasSolicitados, documentoCliente1, documentoEmpleado, unidadesPrestadas, codigoObjeto);
+
+				if(mensaje1 != null){
+					String mensaje2 = empresa.detallePrestamo(codigoPrestamo, codigoObjeto, unidadesPrestadas);
+
+					JOptionPane.showMessageDialog(null, mensaje1);
+					JOptionPane.showMessageDialog(null, mensaje2);
+				}else{
+					mensaje1 = "No hay cantidad suficiente de existencias";
+					JOptionPane.showMessageDialog(null, mensaje1);
+				}
+
+
+
+				break;
+			case 9:
+				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas obbjetos");
+				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del obejto para agregar");
+				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desdea del objeto");
+				String mensaje3 = empresa.detallePrestamo(codigoPrestamo2, codigoObjeto1, unidadesPrestadas1);
+				JOptionPane.showMessageDialog(null, mensaje3);
+
+				break;
+			case 10:
+				String codigoPrestamo1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
+				JOptionPane.showMessageDialog(null, "La informacion respectiva al prestamo es: ");
+				JOptionPane.showMessageDialog(null, empresa.consultarPrestamo(codigoPrestamo1));
 			default:
 				break;
 			}
@@ -179,10 +213,10 @@ public class App {
 		System.out.println("5 -");
 		System.out.println("6 -");
 		System.out.println("7 - Reemplazar un objeto por otro");
-		System.out.println("8 -");
-		System.out.println("9 -");
+		System.out.println("8 - crear un prestamo");
+		System.out.println("9 -Adicionar objeto al prestamo");
 		System.out.println("10 -");
-		System.out.println("11 -");
+		System.out.println("11 -consultar datos de un prestamo");
 		System.out.println("12 -");
 	}
 
