@@ -1,6 +1,6 @@
 package co.edu.uniquindio.prestamo_objetos.aplicacion;
 import co.edu.uniquindio.prestamo_objetos.model.metodosImpresiones;
-import co.edu.uniquindio.programajugueteria.model.TipoJuguete;
+
 
 import java.time.temporal.JulianFields;
 
@@ -36,6 +36,7 @@ public class App {
 
 			//opcion de casos
 
+			String mensaje;
 			switch (opcion) {
 
 
@@ -82,8 +83,8 @@ public class App {
 				String nombre = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto");
 				String codigo= metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto");
 				int unidadesDisponibles = metodosImpresiones.leerEnteroVentana("Ingrese las unidades disponibles del objeto");
-				String estado = metodosImpresiones.leerStringVentana("Ingrese el estado del Objeto:\n d- Disponible\n nd- No Disponible ");
-			    double precioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del objeto:");
+				String estado = metodosImpresiones.leerStringVentana("Ingrese el estado del Objeto:\n -Disponible\n -No Disponible ");
+			    double precioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del alquiler del objeto:");
 
 
 			    String objeto = empresa.crearObjeto(nombre, codigo, unidadesDisponibles, estado,precioAlquiler);
@@ -92,6 +93,41 @@ public class App {
 
 				break;
 
+			case 4:
+
+				//buscar un objeto
+
+				codigo = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto a buscar: ");
+
+			    Objeto encontrado = empresa.obtenerObjeto(codigo);
+				if(encontrado == null){
+					JOptionPane.showMessageDialog(null, "El objeto con codigo :" +codigo+ " no existe");
+
+				}else{
+					JOptionPane.showMessageDialog(null, "La informacion del objeto es :" +encontrado.toString());
+				}
+
+
+				break;
+
+			case 7:
+
+				//reemplazarObjeto
+
+				codigo = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto a reemplazar: ");
+
+				String nuevoNombre = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto:");
+
+				int nuevaUnidadesDisponibles = metodosImpresiones.leerEnteroVentana("Ingrese las unidades disponibles del objeto");
+				String nuevoEstado = metodosImpresiones.leerStringVentana("Ingrese el el estado del objeto:\n -Disponible\n -No Disponible");
+
+				double nuevoPrecioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del alquiler del objeto");
+
+
+				mensaje = empresa.reemplazarObjeto(nuevoNombre, codigo,nuevaUnidadesDisponibles,
+						 nuevoEstado, nuevoPrecioAlquiler);
+
+				JOptionPane.showMessageDialog(null, mensaje);
 
 			default:
 				break;
@@ -139,10 +175,10 @@ public class App {
 		System.out.println("1 - Crear un nuevo empleado");
 		System.out.println("2 - Crear un nuevo Cliente ");
 		System.out.println("3 - Crear un nuevo objeto");
-		System.out.println("4 -");
+		System.out.println("4 - Buscar un objeto dado su codigo");
 		System.out.println("5 -");
 		System.out.println("6 -");
-		System.out.println("7 -");
+		System.out.println("7 - Reemplazar un objeto por otro");
 		System.out.println("8 -");
 		System.out.println("9 -");
 		System.out.println("10 -");

@@ -1,5 +1,7 @@
 package co.edu.uniquindio.prestamo_objetos.model;
 
+
+
 public class Objeto {
 
 	//atributos de la clase
@@ -62,6 +64,8 @@ public class Objeto {
 	public void setPrecioAlquiler(double precioAlquiler) {
 		this.precioAlquiler = precioAlquiler;
 	}
+
+
 
 	//ToString
 

@@ -209,6 +209,58 @@ public class Empresa {
 		   }
 		}
 
+
+	/**
+	 *
+	 * @param codigo
+	 * @return
+	 */
+
+     public Objeto obtenerObjeto(String codigo) {
+
+		Objeto objeto = null;
+
+		if( objeto1 != null && objeto1.getCodigo().equalsIgnoreCase(codigo)){
+			objeto = objeto1;
+			return objeto;
+		}
+		if(objeto2 != null && objeto2.getCodigo().equalsIgnoreCase(codigo)){
+			objeto = objeto2;
+			return objeto;
+		}
+		if( objeto3 != null && objeto3.getCodigo().equalsIgnoreCase(codigo)){
+			objeto = objeto3;
+			return objeto;
+		}
+
+		return objeto;
+
+	}
+
+
+
+
+	public String reemplazarObjeto(String nuevoNombre, String codigo, int nuevaUnidadesDisponibles,
+			String nuevoEstado, double nuevoPrecioAlquiler) {
+
+
+
+		Objeto objetoEncontrado = obtenerObjeto(codigo);
+
+		if(objetoEncontrado == null){
+			return "El Objeto no existe";
+		}else{
+			objetoEncontrado.setNombre(nuevoNombre);
+			objetoEncontrado.setUnidadesDisponibles(nuevaUnidadesDisponibles);
+			objetoEncontrado.setEstado(nuevoEstado);
+			objetoEncontrado.setPrecioAlquiler(nuevoPrecioAlquiler);
+
+			return "El objeto fue reemplazado";
+		}
+
+	}
+
+
 	}
 
 
