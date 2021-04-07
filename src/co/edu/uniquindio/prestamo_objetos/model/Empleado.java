@@ -58,7 +58,10 @@ public class Empleado {
 		return "Empleado [nombre=" + nombre + ", codigo=" + codigo + ", correo=" + correo + ", aniosExperiencia="
 				+ aniosExperiencia + "]";
 	}
-	
+
+	public String adios(){
+		return "adios";
+	}
 
 
 

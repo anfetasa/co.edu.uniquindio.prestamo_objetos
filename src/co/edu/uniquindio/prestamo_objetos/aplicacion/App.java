@@ -46,6 +46,7 @@ public class App {
 			 * */
 			case 1:
 
+
 				String nombreEmpleado = metodosImpresiones.leerStringVentana("Ingrese el nombre del empleado");
 				String codigoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el codigo del empleado");
 				String correoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el correo del empleado");
@@ -144,14 +145,14 @@ public class App {
 					JOptionPane.showMessageDialog(null, mensaje1);
 					JOptionPane.showMessageDialog(null, mensaje2);
 				}else{
-					mensaje1 = "No hay cantidad suficiente de existencias";
-					JOptionPane.showMessageDialog(null, mensaje1);
+					JOptionPane.showMessageDialog(null, "Existencias insuficientes");
 				}
 
 
 
 				break;
 			case 9:
+
 				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas obbjetos");
 				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del obejto para agregar");
 				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desdea del objeto");
@@ -160,6 +161,15 @@ public class App {
 
 				break;
 			case 10:
+
+				String codigoPrestamoo = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
+				int diasTranscurridos = metodosImpresiones.leerEnteroVentana("Inrese los dias transcurridos desde que se solicito el prestamo");
+
+				String men = empresa.entregar(codigoPrestamoo, diasTranscurridos);
+				JOptionPane.showMessageDialog(null, men);
+
+				break;
+			case 11:
 				String codigoPrestamo1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
 				JOptionPane.showMessageDialog(null, "La informacion respectiva al prestamo es: ");
 				JOptionPane.showMessageDialog(null, empresa.consultarPrestamo(codigoPrestamo1));
@@ -215,7 +225,7 @@ public class App {
 		System.out.println("7 - Reemplazar un objeto por otro");
 		System.out.println("8 - crear un prestamo");
 		System.out.println("9 -Adicionar objeto al prestamo");
-		System.out.println("10 -");
+		System.out.println("10 -Entregar un prestamo");
 		System.out.println("11 -consultar datos de un prestamo");
 		System.out.println("12 -");
 	}

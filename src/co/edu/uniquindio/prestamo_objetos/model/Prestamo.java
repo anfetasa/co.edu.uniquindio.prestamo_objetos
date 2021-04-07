@@ -10,6 +10,7 @@ public class Prestamo {
 	private String codigoEmpleado;
 
 
+
 	//constructor
 
 	public Prestamo(String codigo, int diasSolicitados, double valor, String codigoCliente,
@@ -69,8 +70,6 @@ public class Prestamo {
 		return "Prestamo [codigo=" + codigo + ", diasSolicitados=" + diasSolicitados + ", valor=" + valor
 				+ ", codigoCliente=" + codigoCliente + ", codigoEmpleado=" + codigoEmpleado + "]";
 	}
-
-
 
 
 

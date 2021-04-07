@@ -1,5 +1,6 @@
 package co.edu.uniquindio.prestamo_objetos.model;
 
+
 public class DetallePrestamo {
 	private int unidadesPrestadas;
 	private double sobTotal;
@@ -7,6 +8,7 @@ public class DetallePrestamo {
 	private String codigoObjeto;
 
 	//contructor
+
 
 	public DetallePrestamo(int unidadesPrestadas, double sobTotal, String codigoPrestamo, String codigoObjeto) {
 		super();
@@ -52,11 +54,15 @@ public class DetallePrestamo {
 
 	//toString
 
-
 	public String toString() {
 		return "DetallePrestamo [unidadesPrestadas=" + unidadesPrestadas + ", sobTotal=" + sobTotal
 				+ ", codigoPrestamo=" + codigoPrestamo + ", codigoObjeto=" + codigoObjeto + "]";
 	}
+
+
+	//toString
+
+
 
 
 
