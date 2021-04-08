@@ -50,6 +50,7 @@ public class App {
 			 * */
 			case 1:
 
+
 				String nombreEmpleado = metodosImpresiones.leerStringVentana("Ingrese el nombre del empleado");
 				String codigoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el codigo del empleado");
 				String correoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el correo del empleado");
@@ -203,22 +204,32 @@ public class App {
 					JOptionPane.showMessageDialog(null, mensaje1);
 					JOptionPane.showMessageDialog(null, mensaje2);
 				}else{
-					mensaje1 = "No hay cantidad suficiente de existencias";
-					JOptionPane.showMessageDialog(null, mensaje1);
+					JOptionPane.showMessageDialog(null, "Existencias insuficientes");
 				}
 
 
 
 				break;
 			case 9:
+
 				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas objetos");
 				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto para agregar");
 				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desea del objeto");
+
 				String mensaje3 = empresa.detallePrestamo(codigoPrestamo2, codigoObjeto1, unidadesPrestadas1);
 				JOptionPane.showMessageDialog(null, mensaje3);
 
 				break;
 			case 10:
+
+				String codigoPrestamoo = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
+				int diasTranscurridos = metodosImpresiones.leerEnteroVentana("Inrese los dias transcurridos desde que se solicito el prestamo");
+
+				String men = empresa.entregar(codigoPrestamoo, diasTranscurridos);
+				JOptionPane.showMessageDialog(null, men);
+
+				break;
+			case 11:
 				String codigoPrestamo1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
 				JOptionPane.showMessageDialog(null, "La informacion respectiva al prestamo es: ");
 				JOptionPane.showMessageDialog(null, empresa.consultarPrestamo(codigoPrestamo1));
@@ -273,12 +284,17 @@ public class App {
 		System.out.println("3 - Crear un nuevo objeto");
 		System.out.println("4 - Buscar un objeto dado su codigo");
 		System.out.println("5 -Consultar cantidad de prestamos por objeto");
-		System.out.println("6 -");
+		System.out.println("6 - consultar la cantidad total de unidades prestadas de cada objeto");
 		System.out.println("7 - Reemplazar un objeto por otro");
 		System.out.println("8 - crear un prestamo");
 		System.out.println("9 -Adicionar objeto al prestamo");
+
 		System.out.println("10 -consultar datos de un prestamo");
 		System.out.println("11 -");
+
+		System.out.println("10 -Entregar un prestamo");
+		System.out.println("11 -consultar datos de un prestamo");
+
 		System.out.println("12 -");
 	}
 

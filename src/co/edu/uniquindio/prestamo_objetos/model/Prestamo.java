@@ -12,6 +12,7 @@ public class Prestamo {
 	private DetallePrestamo detallePrestamo2;
 
 
+
 	//constructor
 
 	public Prestamo(String codigo, int diasSolicitados, double valor, String codigoCliente,
@@ -115,8 +116,6 @@ public class Prestamo {
 		 }
 
 	 }
-
-
 
 
 
