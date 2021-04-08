@@ -24,9 +24,7 @@ public class Empresa {
 	private DetallePrestamo detallePrestamo1;
 	private DetallePrestamo detallePrestamo2;
 	private DetallePrestamo detallePrestamo3;
-	private int cantidad1 = 0;
-	private int cantidad2 = 0;
-	private int cantidad3 = 0;
+
 
 
 
