@@ -8,6 +8,8 @@ public class Prestamo {
 	private double valor;
 	private String codigoCliente;
 	private String codigoEmpleado;
+	private DetallePrestamo detallePrestamo1;
+	private DetallePrestamo detallePrestamo2;
 
 
 	//constructor
@@ -69,6 +71,54 @@ public class Prestamo {
 		return "Prestamo [codigo=" + codigo + ", diasSolicitados=" + diasSolicitados + ", valor=" + valor
 				+ ", codigoCliente=" + codigoCliente + ", codigoEmpleado=" + codigoEmpleado + "]";
 	}
+
+
+
+/**
+ * metodo para buscar un objeto en un prestamo dado el nombre del objeto
+ * @param nombreObjeto
+ * @return
+ */
+	 public boolean encontrarObjetoNombrado(String nombreObjeto){
+
+		 boolean resultado1 =false;
+		 boolean resultado2 = false;
+
+		 if(detallePrestamo1 != null){
+
+		  resultado1=  detallePrestamo1.encontrarObjetoNombrado(nombreObjeto);
+
+		 }
+
+		 if(detallePrestamo2 != null){
+
+			  resultado2= detallePrestamo2.encontrarObjetoNombrado(nombreObjeto);
+
+			 }
+
+		 if (resultado1 == true && resultado2 == true){
+
+			 return true;
+
+		 }
+
+		 else if(resultado1==false && resultado2== true){
+
+		 return true;
+		 }
+		 else if(resultado1== true && resultado2 == false){
+
+			 return true;
+		 }
+		 else{
+			  return false;
+		 }
+
+	 }
+
+
+
+
 
 
 

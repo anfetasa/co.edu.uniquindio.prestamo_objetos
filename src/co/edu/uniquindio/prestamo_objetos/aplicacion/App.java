@@ -17,6 +17,10 @@ import co.edu.uniquindio.prestamo_objetos.model.TipoDocumento;
 public class App {
 
 
+	private static Empresa empresa;
+
+
+
 	//metodo main
 
 	public static void main(String[] args) {
@@ -63,20 +67,41 @@ public class App {
 			case 2:
 
 
-				String documentoCliente = metodosImpresiones.leerStringVentana("Ingrese el documento del cliente");
-				String nombreCliente = metodosImpresiones.leerStringVentana("Ingrese el nombre del cliente");
-				String generoCliente = metodosImpresiones.leerStringVentana("Ingrese el genero del cliente");
-				String ciudadResidenciaCliente = metodosImpresiones.leerStringVentana("Ingrese la ciudad de residencia del cliente");
-			    int valorTipo = metodosImpresiones.leerEnteroVentana("Ingrese el tipo de documento: \n 0- Cedula\n 1- Pasaporte\n 2- Cedula Extrangera ");
+				 String aviso="";
+					String documentoCliente = metodosImpresiones.leerStringVentana("Ingrese el documento del cliente");
+					String nombreCliente = metodosImpresiones.leerStringVentana("Ingrese el nombre del cliente");
+					String generoCliente = metodosImpresiones.leerStringVentana("Ingrese el genero del cliente");
+					String ciudadResidenciaCliente = metodosImpresiones.leerStringVentana("Ingrese la ciudad de residencia del cliente");
+				    int valorTipo = metodosImpresiones.leerEnteroVentana("Ingrese el tipo de documento: \n 0- Cedula\n 1- Pasaporte\n 2- Cedula Extrangera ");
+
+				    TipoDocumento tipoDocumento = verificarDocumentoIngresado(valorTipo);
+
+				    if( valorTipo == 0 || valorTipo == 1 || valorTipo == 2){
 
 
-			    TipoDocumento tipoDocumento = verificarDocumentoIngresado(valorTipo);
+		                String cliente = empresa.agregarClientes(documentoCliente,nombreCliente,generoCliente,ciudadResidenciaCliente,tipoDocumento);
 
-			    String cliente = empresa.agregarClientes(documentoCliente,nombreCliente,generoCliente,ciudadResidenciaCliente,tipoDocumento);
+						JOptionPane.showMessageDialog(null, cliente);
 
-				JOptionPane.showMessageDialog(null, cliente);
+
+
+					    continue;
+
+				    } else{
+
+				    	aviso= ("el cliente no puede ser creado debido a que el tipo de documento es invalido");
+
+						 JOptionPane.showMessageDialog(null, aviso);
+
+				    }
 
 				break;
+
+
+				 /*
+	             * Responsable: Juan Giraldo
+	             * Ejercicio 3 : crear 3 objetos
+	             */
 
 			case 3:
 
@@ -92,6 +117,10 @@ public class App {
 
 				break;
 
+				 /*
+	             * Responsable: Juan Giraldo
+	             * Ejercicio 4 : buscar un objeto dado un codigo por el usuario
+	             */
 			case 4:
 
 				//buscar un objeto
@@ -109,6 +138,35 @@ public class App {
 
 				break;
 
+				/*
+	             * Responsable: Juan Giraldo
+	             * Ejercicio 5 : buscar en cuantos prestamos se encuentra un objeto
+	             */
+
+			case 5:
+
+				 String nombreObjeto = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto a buscar:");
+
+
+                  int cant=0;
+
+
+                  cant= empresa.consultarObjetoEnPrestamos(nombreObjeto);
+
+                  mensaje = "La cantidad de prestamos en la que se encuentra el objeto segun el nombre que ingreso " +nombreObjeto+ "es" +cant;
+
+                  JOptionPane.showMessageDialog(null, mensaje);
+
+
+                  break;
+
+
+
+                  /*
+                   * Responsable: Juan Giraldo
+                   * Ejercicio 2 : reemplazar un objeto por otro
+                   */
+
 			case 7:
 
 				//reemplazarObjeto
@@ -118,15 +176,16 @@ public class App {
 				String nuevoNombre = metodosImpresiones.leerStringVentana("Ingrese el nombre del objeto:");
 
 				int nuevaUnidadesDisponibles = metodosImpresiones.leerEnteroVentana("Ingrese las unidades disponibles del objeto");
-				String nuevoEstado = metodosImpresiones.leerStringVentana("Ingrese el el estado del objeto:\n -Disponible\n -No Disponible");
 
-				double nuevoPrecioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del alquiler del objeto");
+                double nuevoPrecioAlquiler = metodosImpresiones.leerDoubleVentana("Ingrese el precio del alquiler del objeto");
 
 
-				mensaje = empresa.reemplazarObjeto(nuevoNombre, codigo,nuevaUnidadesDisponibles,
-						 nuevoEstado, nuevoPrecioAlquiler);
+				mensaje = empresa.reemplazarObjeto(nuevoNombre,codigo,nuevaUnidadesDisponibles,
+						 nuevoPrecioAlquiler);
 
 				JOptionPane.showMessageDialog(null, mensaje);
+
+				break;
 
 			case 8:
 
@@ -152,9 +211,9 @@ public class App {
 
 				break;
 			case 9:
-				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas obbjetos");
-				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del obejto para agregar");
-				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desdea del objeto");
+				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas objetos");
+				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto para agregar");
+				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desea del objeto");
 				String mensaje3 = empresa.detallePrestamo(codigoPrestamo2, codigoObjeto1, unidadesPrestadas1);
 				JOptionPane.showMessageDialog(null, mensaje3);
 
@@ -202,6 +261,9 @@ public class App {
 	}
 
 
+
+
+
 	//metodo del menu de opciones
 
 	public static void mostrarMenu(){
@@ -210,13 +272,13 @@ public class App {
 		System.out.println("2 - Crear un nuevo Cliente ");
 		System.out.println("3 - Crear un nuevo objeto");
 		System.out.println("4 - Buscar un objeto dado su codigo");
-		System.out.println("5 -");
+		System.out.println("5 -Consultar cantidad de prestamos por objeto");
 		System.out.println("6 -");
 		System.out.println("7 - Reemplazar un objeto por otro");
 		System.out.println("8 - crear un prestamo");
 		System.out.println("9 -Adicionar objeto al prestamo");
-		System.out.println("10 -");
-		System.out.println("11 -consultar datos de un prestamo");
+		System.out.println("10 -consultar datos de un prestamo");
+		System.out.println("11 -");
 		System.out.println("12 -");
 	}
 

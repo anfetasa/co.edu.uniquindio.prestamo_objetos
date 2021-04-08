@@ -24,6 +24,10 @@ public class Empresa {
 	private DetallePrestamo detallePrestamo1;
 	private DetallePrestamo detallePrestamo2;
 	private DetallePrestamo detallePrestamo3;
+	private int cantidad1 = 0;
+	private int cantidad2 = 0;
+	private int cantidad3 = 0;
+
 
 
 	//constructor
@@ -331,7 +335,7 @@ public class Empresa {
     */
 
 	public String reemplazarObjeto(String nuevoNombre, String codigo, int nuevaUnidadesDisponibles,
-			String nuevoEstado, double nuevoPrecioAlquiler) {
+			 double nuevoPrecioAlquiler) {
 
 
 
@@ -342,8 +346,7 @@ public class Empresa {
 		}else{
 			objetoEncontrado.setNombre(nuevoNombre);
 			objetoEncontrado.setUnidadesDisponibles(nuevaUnidadesDisponibles);
-			objetoEncontrado.setEstado(nuevoEstado);
-			objetoEncontrado.setPrecioAlquiler(nuevoPrecioAlquiler);
+		    objetoEncontrado.setPrecioAlquiler(nuevoPrecioAlquiler);
 
 			return "El objeto fue reemplazado";
 		}
@@ -839,6 +842,56 @@ public class Empresa {
 		}
 		return prestamo;
 	}
+
+     /**
+      * metodo que sirve para consultar en cuantos prestamos esta un objeto
+      *
+      * @param nombreObjeto
+      * @return
+      */
+	public int consultarObjetoEnPrestamos(String nombreObjeto){
+
+
+
+    int cantPrestamos=0;
+
+
+
+    if(prestamo1 != null ) {
+
+      if(prestamo1.encontrarObjetoNombrado(nombreObjeto)){
+
+    	  cantPrestamos= cantPrestamos+1;
+      }
+
+    }
+
+    if(prestamo2 != null ) {
+
+        if(prestamo2.encontrarObjetoNombrado(nombreObjeto)){
+
+      	  cantPrestamos= cantPrestamos+1;
+        }
+
+      }
+
+    if(prestamo3 != null ) {
+
+        if(prestamo3.encontrarObjetoNombrado(nombreObjeto)){
+
+      	  cantPrestamos= cantPrestamos+1;
+        }
+
+      }
+
+
+    return cantPrestamos;
+
+
+    }
+
+
+
 
 
 }

@@ -5,6 +5,10 @@ public class DetallePrestamo {
 	private double sobTotal;
 	private String codigoPrestamo;
 	private String codigoObjeto;
+	private Objeto objeto;
+	private Objeto objeto1;
+	private Objeto objeto2;
+	private Objeto objeto3;
 
 	//contructor
 
@@ -52,11 +56,40 @@ public class DetallePrestamo {
 
 	//toString
 
+   public Objeto getObjeto(){
 
-	public String toString() {
+	 return objeto;
+
+
+         }
+
+   public String toString() {
 		return "DetallePrestamo [unidadesPrestadas=" + unidadesPrestadas + ", sobTotal=" + sobTotal
 				+ ", codigoPrestamo=" + codigoPrestamo + ", codigoObjeto=" + codigoObjeto + "]";
 	}
+
+
+   public boolean encontrarObjetoNombrado(String nombreObjeto){
+
+       if(objeto1 != null && objeto1.getNombre().equalsIgnoreCase(nombreObjeto)){
+
+        return true;
+
+       } else if (objeto2 != null && objeto2.getNombre().equalsIgnoreCase(nombreObjeto)){
+
+			return true;
+		}
+
+       if( objeto3 != null && objeto3.getNombre().equalsIgnoreCase(nombreObjeto)){
+
+
+    	   return true;
+		}
+
+       return false;
+
+   }
+
 
 
 
