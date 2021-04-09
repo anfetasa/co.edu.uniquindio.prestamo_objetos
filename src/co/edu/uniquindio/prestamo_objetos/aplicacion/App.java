@@ -54,7 +54,7 @@ public class App {
 				String nombreEmpleado = metodosImpresiones.leerStringVentana("Ingrese el nombre del empleado");
 				String codigoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el codigo del empleado");
 				String correoEmpleado = metodosImpresiones.leerStringVentana("Ingrese el correo del empleado");
-				int aniosExperienciaEmpleado = metodosImpresiones.leerEnteroVentana("Ingrese los a�os de experiencia del empleado");
+				int aniosExperienciaEmpleado = metodosImpresiones.leerEnteroVentana("Ingrese los a�os de experiencia del empleado");
 
 				String empleado = empresa.agregarEmpleados(nombreEmpleado, codigoEmpleado, correoEmpleado, aniosExperienciaEmpleado);
 
@@ -188,7 +188,7 @@ public class App {
 
 				break;
 
-			case 8:
+				case 8:
 
 				String codigoPrestamo = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
 				int diasSolicitados = metodosImpresiones.leerEnteroVentana("Ingrese la cantidad de dias solicitados del prestamo");
@@ -212,10 +212,9 @@ public class App {
 				break;
 			case 9:
 
-				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas objetos");
-				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del objeto para agregar");
-				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desea del objeto");
-
+				String codigoPrestamo2 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo al que le desea agregar mas obbjetos");
+				String codigoObjeto1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del obejto para agregar");
+				int unidadesPrestadas1 = metodosImpresiones.leerEnteroVentana("Ingrese las unidades que desdea del objeto");
 				String mensaje3 = empresa.detallePrestamo(codigoPrestamo2, codigoObjeto1, unidadesPrestadas1);
 				JOptionPane.showMessageDialog(null, mensaje3);
 
@@ -233,11 +232,34 @@ public class App {
 				String codigoPrestamo1 = metodosImpresiones.leerStringVentana("Ingrese el codigo del prestamo");
 				JOptionPane.showMessageDialog(null, "La informacion respectiva al prestamo es: ");
 				JOptionPane.showMessageDialog(null, empresa.consultarPrestamo(codigoPrestamo1));
+
+				break;
+
+			case 12:
+
+				String codigoEmpleadoo = metodosImpresiones.leerStringVentana("Ingrese el codigo del empleado");
+
+				int prestamos = empresa.cantidadPrestamosEmpleado(codigoEmpleadoo);
+				JOptionPane.showMessageDialog(null, "La cantidad de prestamos que realizo el empleado es de: " + prestamos);
+				break;
+
+			case 13:
+
+				String msg1 = empresa.empleadoUnidadesPrestadas();
+				JOptionPane.showMessageDialog(null, msg1);
+
+				break;
+			case 14:
+
+				double msg2 = empresa.getDineroRecaudado();
+				JOptionPane.showMessageDialog(null, "La cantidad de dinero recaudado por la empresa es de: $" + msg2);
+				break;
 			default:
+
 				break;
 			}
 
-		}while(opcion != 15);
+		}while(opcion != 16);
 	}
 
 	/**
@@ -272,30 +294,26 @@ public class App {
 	}
 
 
-
-
-
 	//metodo del menu de opciones
 
 	public static void mostrarMenu(){
+		
 		System.out.println("------Opciones de menu------");
 		System.out.println("1 - Crear un nuevo empleado");
 		System.out.println("2 - Crear un nuevo Cliente ");
 		System.out.println("3 - Crear un nuevo objeto");
 		System.out.println("4 - Buscar un objeto dado su codigo");
-		System.out.println("5 -Consultar cantidad de prestamos por objeto");
-		System.out.println("6 - consultar la cantidad total de unidades prestadas de cada objeto");
+		System.out.println("5 - consultar dado el nombre del objeto la cantidad de préstamos en el cual está incluido");
+		System.out.println("6 -");
 		System.out.println("7 - Reemplazar un objeto por otro");
 		System.out.println("8 - crear un prestamo");
 		System.out.println("9 -Adicionar objeto al prestamo");
-
-		System.out.println("10 -consultar datos de un prestamo");
-		System.out.println("11 -");
-
 		System.out.println("10 -Entregar un prestamo");
 		System.out.println("11 -consultar datos de un prestamo");
-
-		System.out.println("12 -");
+		System.out.println("12 -Mostrar la cantidad de prestamos realizados por cada empleado");
+		System.out.println("13 -Mostrar datos del empleado con m�s unidades prestadas");
+		System.out.println("14 -Total de dinero recaudado por la empresa.");
+		System.out.println("16 -Salir del programa");
 	}
 
 }

@@ -27,6 +27,9 @@ public class Empresa {
 	private DetallePrestamo detallePrestamo5;
 	private DetallePrestamo detallePrestamo6;
 
+	private double dineroRecaudado = 0;
+
+
 
 
 
@@ -166,6 +169,13 @@ public class Empresa {
 
 	public void setDetallePrestamo6(DetallePrestamo detallePrestamo6) {
 		this.detallePrestamo6 = detallePrestamo6;
+	}
+	public double getDineroRecaudado() {
+		return dineroRecaudado;
+	}
+
+	public void setDineroRecaudado(double dineroRecaudado) {
+		this.dineroRecaudado = dineroRecaudado;
 	}
 
 	//toString
@@ -373,268 +383,6 @@ public class Empresa {
 
 	}
 
-	public String crearPrestamo(String codigo, int diasSolicitados, String codigoCliente, String codigoEmpleado, int unidadesPrestadas, String codigoObjeto){
-
-
-		Objeto objeto = obtenerObjeto(codigoObjeto);
-		int unidadesDisponibles = objeto.getUnidadesDisponibles();
-		if(unidadesDisponibles >= unidadesPrestadas){
-
-			if(prestamo1== null){
-				prestamo1 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
-
-				return "Prestamo 1 creado con exito";
-
-			}else{
-				if(prestamo2 == null){
-					prestamo2 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
-
-					return "Prestamo 2 creado con exito";
-				}else{
-					if(prestamo3 == null){
-						prestamo3 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
-
-						return "Prestamo 3 creado con exito";
-					}else{
-						return "Ya existen los 3 prestamos posibles creados";
-					}
-				}
-			}
-		}else{
-
-			return null;
-		}
-	}
-
-	public String detallePrestamo(String codigoPrestamo, String codigoObjeto, int unidadesPrestadas){
-
-		String msg = "";
-		Objeto objeto = obtenerObjeto(codigoObjeto);
-		double sobTotal = objeto.getPrecioAlquiler();
-		int diasSolicitados;
-		int unidadesDisponibles = objeto.getUnidadesDisponibles();
-		try{
-			if(prestamo1 != null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-				if(detallePrestamo1 == null){
-					diasSolicitados = prestamo1.getDiasSolicitados();
-					msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-					if(unidadesDisponibles >= unidadesPrestadas){
-
-						detallePrestamo1 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-						prestamo1.setValor(sobTotal);
-						calcularValor(diasSolicitados);
-					}
-					return msg;
-
-				}else{
-					if(detallePrestamo2 == null){
-
-						diasSolicitados = prestamo1.getDiasSolicitados();
-						msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-						if(unidadesDisponibles >= unidadesPrestadas){
-
-							detallePrestamo2 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-							prestamo1.setValor(sobTotal);
-							calcularValor(diasSolicitados);
-						}
-						return msg;
-					}else{
-						return "No se pueden adicionar mas objetos al prestamo";
-					}
-				}
-			}else{
-				if(prestamo2 != null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-					if(detallePrestamo3 == null){
-
-
-						diasSolicitados = prestamo2.getDiasSolicitados();
-						msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-						if(unidadesDisponibles >= unidadesPrestadas){
-
-							detallePrestamo3 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-							prestamo2.setValor(sobTotal);
-							calcularValor(diasSolicitados);
-						}
-						System.out.println("p3.3");
-						return msg;
-
-					}else{
-						if(detallePrestamo4 == null){
-
-
-							diasSolicitados = prestamo2.getDiasSolicitados();
-							msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-							if(unidadesDisponibles >= unidadesPrestadas){
-
-								detallePrestamo4 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-								prestamo3.setValor(sobTotal);
-								calcularValor(diasSolicitados);
-							}
-
-							return msg;
-						}else{
-							return "No se pueden adicionar mas objetos al prestamo";
-						}
-					}
-				}else{
-					if(prestamo3 != null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-						if(detallePrestamo5 == null){
-
-
-							diasSolicitados = prestamo3.getDiasSolicitados();
-							msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-							if(unidadesDisponibles >= unidadesPrestadas){
-
-								detallePrestamo5 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-								prestamo3.setValor(sobTotal);
-								calcularValor(diasSolicitados);
-							}
-
-							return msg;
-
-						}else{
-							if(detallePrestamo6 == null){
-
-
-								diasSolicitados = prestamo3.getDiasSolicitados();
-								msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
-								if(unidadesDisponibles >= unidadesPrestadas){
-
-									detallePrestamo6 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
-									prestamo3.setValor(sobTotal);
-									calcularValor(diasSolicitados);
-								}
-
-								return msg;
-							}else{
-								return "No se pueden adicionar mas objetos al prestamo";
-							}
-						}
-					}
-				}
-				return "No se puede realizar la operacion";
-			}
-
-		}catch(Exception e){
-			return ("error al crear intente de nuevo " + e);
-		}
-	}
-
-	public String crearDetallePrestamo(int unidadesPrestadas, int unidadesDisponibles, double sobTotal, String codigoPrestamo, String codigoObjeto){
-
-
-		if(unidadesDisponibles >= unidadesPrestadas){
-
-
-			unidadesDisponibles -= unidadesPrestadas;
-
-			if(objeto1 != null){
-
-				if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
-
-
-
-					if(unidadesDisponibles == 0){
-
-						objeto1.setEstado("NO DISPONIBLE");
-
-					}
-
-					objeto1.setUnidadesDisponibles(unidadesDisponibles);
-				}
-			}
-			if (objeto2 != null){
-				if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
-
-					if(unidadesDisponibles == 0){
-						objeto2.setEstado("NO DISPONIBLE");
-					}
-					objeto2.setUnidadesDisponibles(unidadesDisponibles);
-				}
-			}
-
-			if(objeto3 != null){
-				if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
-					if(unidadesDisponibles == 0){
-						objeto3.setEstado("NO DISPONIBLE");
-					}
-					objeto3.setUnidadesDisponibles(unidadesDisponibles);
-				}
-			}
-			return "Agregado Correctamente";
-		}else{
-
-			return "No hay las unidades del producto suficientes para el prestamo";
-		}
-
-	}
-
-
-	public void consultarDetallePrestamo( String codigoPrestamo){
-
-		DetallePrestamo detallePrestamo = null;
-		if( detallePrestamo1 != null && detallePrestamo1.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo1;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-		if( detallePrestamo2 != null && detallePrestamo2.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo2;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-		if( detallePrestamo3 != null && detallePrestamo3.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo3;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-		if( detallePrestamo4 != null && detallePrestamo4.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo4;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-		if( detallePrestamo5 != null && detallePrestamo5.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo5;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-		if( detallePrestamo6 != null && detallePrestamo6.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
-
-			detallePrestamo = detallePrestamo6;
-			JOptionPane.showMessageDialog(null, detallePrestamo);
-		}
-
-
-	}
-
-	public Prestamo consultarPrestamo(String codigoPrestamo){
-
-
-		Prestamo prestamo= null;
-
-		if( prestamo1 != null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-
-			consultarDetallePrestamo(codigoPrestamo);
-
-			prestamo = prestamo1;
-			return prestamo;
-		}
-		if( prestamo2 != null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-
-			consultarDetallePrestamo(codigoPrestamo);
-			prestamo = prestamo2;
-			return prestamo;
-		}
-		if( prestamo3 != null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-
-			consultarDetallePrestamo(codigoPrestamo);
-			prestamo = prestamo3;
-			return prestamo;
-		}
-		return prestamo;
-	}
-
-
      /**
       * metodo que sirve para consultar en cuantos prestamos esta un objeto
       *
@@ -682,153 +430,624 @@ public class Empresa {
 
     }
 
+	 /**
+	    * Metod: crearPrestamo
+	    * Responsable: Andres Taborda
+	    * Ejercicio 4.1
+	    * @param codigo
+	    * @param diasSolicitados
+	    * @param codigoCliente
+	    * @param codigoEmpleado
+	    * @param unidadesPrestadas
+	    * @param codigoObjeto
+	    * @return
+	    */
+
+		public String crearPrestamo(String codigo, int diasSolicitados, String codigoCliente, String codigoEmpleado, int unidadesPrestadas, String codigoObjeto){
 
 
-
-
-	public void calcularValor(int diasTrasncurridos){
-		int dias = 0;
-		double alquiler = 0;
-		double valor = 0;
-		if(prestamo1 != null){
-			dias = 0;
-			alquiler = 0;
-			valor = 0;
-			dias = prestamo1.getDiasSolicitados();
-			alquiler = prestamo1.getValor();
-			if (detallePrestamo2 != null){
-				valor = detallePrestamo1.getSobTotal() +  detallePrestamo2.getSobTotal();
+			Objeto objeto = obtenerObjeto(codigoObjeto);
+			int unidadesDisponibles = objeto.getUnidadesDisponibles();
+			if(unidadesDisponibles >= unidadesPrestadas){
+	
+				if(prestamo1== null){
+					prestamo1 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+	
+					return "Prestamo 1 creado con exito";
+	
+				}else{
+					if(prestamo2 == null){
+						prestamo2 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+	
+						return "Prestamo 2 creado con exito";
+					}else{
+						if(prestamo3 == null){
+							prestamo3 = new Prestamo(codigo, diasSolicitados, 0, codigoCliente, codigoEmpleado);
+	
+							return "Prestamo 3 creado con exito";
+						}else{
+							return "Ya existen los 3 prestamos posibles creados";
+						}
+					}
+				}
 			}else{
-				valor = detallePrestamo1.getSobTotal();
+	
+				return null;
 			}
-			if ( diasTrasncurridos > dias){
-				valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
-
-			}
-			prestamo1.setValor(valor);
-
 		}
-		if(prestamo2 != null){
-			dias = 0;
-			alquiler = 0;
-			valor = 0;
-			dias = prestamo2.getDiasSolicitados();
-			alquiler = prestamo1.getValor();
-			if (detallePrestamo4 != null){
-				valor = detallePrestamo3.getSobTotal() +  detallePrestamo4.getSobTotal();
+	
+		 /**
+			* Metod: detallePrestamo
+			* Responsable: Andres Taborda
+			* @param codigoPrestamo
+			* @param codigoObjeto
+			* @param unidadesPrestadas
+			* @return
+			*/
+		public String detallePrestamo(String codigoPrestamo, String codigoObjeto, int unidadesPrestadas){
+	
+			String msg = "";
+			Objeto objeto = obtenerObjeto(codigoObjeto);
+			double sobTotal = objeto.getPrecioAlquiler();
+			int diasSolicitados;
+			int unidadesDisponibles = objeto.getUnidadesDisponibles();
+			try{
+				if(prestamo1 != null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+					if(detallePrestamo1 == null){
+						diasSolicitados = prestamo1.getDiasSolicitados();
+						msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+						if(unidadesDisponibles >= unidadesPrestadas){
+	
+							detallePrestamo1 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+							prestamo1.setValor(sobTotal);
+							calcularValor(diasSolicitados);
+						}
+						return msg;
+	
+					}else{
+						if(detallePrestamo2 == null){
+	
+							diasSolicitados = prestamo1.getDiasSolicitados();
+							msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+							if(unidadesDisponibles >= unidadesPrestadas){
+	
+								detallePrestamo2 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+								prestamo1.setValor(sobTotal);
+								calcularValor(diasSolicitados);
+							}
+							return msg;
+						}else{
+							return "No se pueden adicionar mas objetos al prestamo";
+						}
+					}
+				}else{
+					if(prestamo2 != null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+						if(detallePrestamo3 == null){
+	
+	
+							diasSolicitados = prestamo2.getDiasSolicitados();
+							msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+							if(unidadesDisponibles >= unidadesPrestadas){
+	
+								detallePrestamo3 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+								prestamo2.setValor(sobTotal);
+								calcularValor(diasSolicitados);
+							}
+	
+							return msg;
+	
+						}else{
+							if(detallePrestamo4 == null){
+	
+	
+								diasSolicitados = prestamo2.getDiasSolicitados();
+								msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+								if(unidadesDisponibles >= unidadesPrestadas){
+	
+									detallePrestamo4 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+									prestamo3.setValor(sobTotal);
+									calcularValor(diasSolicitados);
+								}
+	
+								return msg;
+							}else{
+								return "No se pueden adicionar mas objetos al prestamo";
+							}
+						}
+					}else{
+						if(prestamo3 != null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+							if(detallePrestamo5 == null){
+	
+	
+								diasSolicitados = prestamo3.getDiasSolicitados();
+								msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+								if(unidadesDisponibles >= unidadesPrestadas){
+	
+									detallePrestamo5 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+									prestamo3.setValor(sobTotal);
+									calcularValor(diasSolicitados);
+								}
+	
+								return msg;
+	
+							}else{
+								if(detallePrestamo6 == null){
+	
+	
+									diasSolicitados = prestamo3.getDiasSolicitados();
+									msg = crearDetallePrestamo(unidadesPrestadas, unidadesDisponibles, sobTotal, codigoPrestamo, codigoObjeto);
+									if(unidadesDisponibles >= unidadesPrestadas){
+	
+										detallePrestamo6 = new DetallePrestamo(unidadesPrestadas, sobTotal, codigoPrestamo, codigoObjeto);
+										prestamo3.setValor(sobTotal);
+										calcularValor(diasSolicitados);
+									}
+	
+									return msg;
+								}else{
+									return "No se pueden adicionar mas objetos al prestamo";
+								}
+							}
+						}
+					}
+					return "No se puede realizar la operacion";
+				}
+	
+			}catch(Exception e){
+				return ("error al crear intente de nuevo " + e);
+			}
+		}
+		 /**
+			* Metod: crearDetallePrestamo
+			* Responsable: Andres Taborda
+			* @param unidadesPrestadas
+			* @param unidadesDisponibles
+			* @param sobTotal
+			* @param codigoPrestamo
+			* @param codigoObjeto
+			* @return
+			*/
+	
+		public String crearDetallePrestamo(int unidadesPrestadas, int unidadesDisponibles, double sobTotal, String codigoPrestamo, String codigoObjeto){
+	
+	
+			if(unidadesDisponibles >= unidadesPrestadas){
+	
+	
+				unidadesDisponibles -= unidadesPrestadas;
+	
+				if(objeto1 != null){
+	
+					if(objeto1.getCodigo().equalsIgnoreCase(codigoObjeto)){
+	
+	
+	
+						if(unidadesDisponibles == 0){
+	
+							objeto1.setEstado("NO DISPONIBLE");
+	
+						}
+	
+						objeto1.setUnidadesDisponibles(unidadesDisponibles);
+					}
+				}
+				if (objeto2 != null){
+					if(objeto2.getCodigo().equalsIgnoreCase(codigoObjeto)){
+	
+						if(unidadesDisponibles == 0){
+							objeto2.setEstado("NO DISPONIBLE");
+						}
+						objeto2.setUnidadesDisponibles(unidadesDisponibles);
+					}
+				}
+	
+				if(objeto3 != null){
+					if( objeto3.getCodigo().equalsIgnoreCase(codigoObjeto)){
+						if(unidadesDisponibles == 0){
+							objeto3.setEstado("NO DISPONIBLE");
+						}
+						objeto3.setUnidadesDisponibles(unidadesDisponibles);
+					}
+				}
+				return "Agregado Correctamente";
 			}else{
-				valor = detallePrestamo3.getSobTotal();
+	
+				return "No hay las unidades del producto suficientes para el prestamo";
 			}
-			if ( diasTrasncurridos > dias){
-				System.out.println("div");
-				valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
-
-			}
-			prestamo2.setValor(valor);
-
+	
 		}
-		if(prestamo3 != null){
-			dias = 0;
-			alquiler = 0;
-			valor = 0;
-			dias = prestamo3.getDiasSolicitados();
-			alquiler = prestamo1.getValor();
-			if (detallePrestamo6 != null){
-				valor = detallePrestamo6.getSobTotal() +  detallePrestamo5.getSobTotal();
-			}else{
-				valor = detallePrestamo5.getSobTotal();
+	
+		/**
+			* Metod: consultarDetallePrestamo
+			* Responsable: Andres Taborda
+			* @param codigoPrestamo
+			* @return
+			*/
+		public void consultarDetallePrestamo( String codigoPrestamo){
+	
+			DetallePrestamo detallePrestamo = null;
+			if( detallePrestamo1 != null && detallePrestamo1.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo1;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
 			}
-			if ( diasTrasncurridos > dias){
-				valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
-
+			if( detallePrestamo2 != null && detallePrestamo2.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo2;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
 			}
-			prestamo3.setValor(valor);
-
+			if( detallePrestamo3 != null && detallePrestamo3.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo3;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
+			}
+			if( detallePrestamo4 != null && detallePrestamo4.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo4;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
+			}
+			if( detallePrestamo5 != null && detallePrestamo5.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo5;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
+			}
+			if( detallePrestamo6 != null && detallePrestamo6.getCodigoPrestamo().equalsIgnoreCase(codigoPrestamo)){
+	
+				detallePrestamo = detallePrestamo6;
+				JOptionPane.showMessageDialog(null, detallePrestamo);
+			}
+	
+	
 		}
-	}
-
-	public String entregar(String codigoPrestamo, int diasTrasncurridos){
-		int opcion;
-		double costo;
-		if(prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
-			calcularValor(diasTrasncurridos);
-
-			costo = prestamo1.getValor();
-			JOptionPane.showMessageDialog(null, "El valor del prestamo es: " + costo);
-
-			opcion = metodosImpresiones.leerEnteroVentana("Ingrese 1 para confirmar la entrega 2 para rechazar");
-
-			switch (opcion) {
-			case 1:
-				prestamo1 = null;
-				detallePrestamo1 = null;
-				detallePrestamo2 = null;
-				return "eliminado con exito";
-			case 2:
-				return "Su prestamo sigue pendiente";
-
-			default:
-
-
-				return "El prestamo no existe";
+		/**
+			* Metod: consultarPrestamo
+			* Responsable: Andres Taborda
+			* @param codigoPrestamo
+			* @return
+			*/
+		public Prestamo consultarPrestamo(String codigoPrestamo){
+	
+	
+			Prestamo prestamo= null;
+	
+			if( prestamo1 != null && prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+	
+				consultarDetallePrestamo(codigoPrestamo);
+	
+				prestamo = prestamo1;
+				return prestamo;
 			}
-		}else{
-			if(prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+			if( prestamo2 != null && prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+	
+				consultarDetallePrestamo(codigoPrestamo);
+				prestamo = prestamo2;
+				return prestamo;
+			}
+			if( prestamo3 != null && prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+	
+				consultarDetallePrestamo(codigoPrestamo);
+				prestamo = prestamo3;
+				return prestamo;
+			}
+			return prestamo;
+		}
+		/**
+			* Metod: calcularValor
+			* Responsable: Andres Taborda
+			* @param diasTrasncurridos
+			* @return
+			*/
+		public void calcularValor(int diasTrasncurridos){
+			int dias = 0;
+			double alquiler = 0;
+			double valor = 0;
+			if(prestamo1 != null){
+				dias = 0;
+				alquiler = 0;
+				valor = 0;
+				dias = prestamo1.getDiasSolicitados();
+				alquiler = prestamo1.getValor();
+				if (detallePrestamo2 != null){
+					valor = detallePrestamo1.getSobTotal() +  detallePrestamo2.getSobTotal();
+				}else{
+					valor = detallePrestamo1.getSobTotal();
+				}
+				if ( diasTrasncurridos > dias){
+					valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
+	
+				}
+				prestamo1.setValor(valor);
+				calcularDineroReacudado();
+	
+			}
+			if(prestamo2 != null){
+				dias = 0;
+				alquiler = 0;
+				valor = 0;
+				dias = prestamo2.getDiasSolicitados();
+				alquiler = prestamo1.getValor();
+				if (detallePrestamo4 != null){
+					valor = detallePrestamo3.getSobTotal() +  detallePrestamo4.getSobTotal();
+				}else{
+					valor = detallePrestamo3.getSobTotal();
+				}
+				if ( diasTrasncurridos > dias){
+	
+					valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
+	
+				}
+				prestamo2.setValor(valor);
+				calcularDineroReacudado();
+	
+			}
+			if(prestamo3 != null){
+				dias = 0;
+				alquiler = 0;
+				valor = 0;
+				dias = prestamo3.getDiasSolicitados();
+				alquiler = prestamo1.getValor();
+				if (detallePrestamo6 != null){
+					valor = detallePrestamo6.getSobTotal() +  detallePrestamo5.getSobTotal();
+				}else{
+					valor = detallePrestamo5.getSobTotal();
+				}
+				if ( diasTrasncurridos > dias){
+					valor = valor + (( (70 * valor) / 100) * (diasTrasncurridos-1)) ;
+	
+				}
+				prestamo3.setValor(valor);
+				calcularDineroReacudado();
+	
+			}
+		}
+		/**
+			* Metod: entregar
+			* Responsable: Andres Taborda
+			* @param codigoPrestamo
+			* @param diasTrasncurridos
+			* @return
+			*/
+		public String entregar(String codigoPrestamo, int diasTrasncurridos){
+			int opcion;
+			double costo;
+			if(prestamo1.getCodigo().equalsIgnoreCase(codigoPrestamo)){
 				calcularValor(diasTrasncurridos);
-
-				costo = prestamo2.getValor();
+	
+				costo = prestamo1.getValor();
 				JOptionPane.showMessageDialog(null, "El valor del prestamo es: " + costo);
-
+	
 				opcion = metodosImpresiones.leerEnteroVentana("Ingrese 1 para confirmar la entrega 2 para rechazar");
-
+	
 				switch (opcion) {
 				case 1:
-					prestamo2 = null;
-					detallePrestamo3 = null;
-					detallePrestamo4 = null;
+					prestamo1 = null;
+					detallePrestamo1 = null;
+					detallePrestamo2 = null;
 					return "eliminado con exito";
 				case 2:
 					return "Su prestamo sigue pendiente";
-
+	
 				default:
-
-
+	
+	
 					return "El prestamo no existe";
 				}
 			}else{
-				if(prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+				if(prestamo2.getCodigo().equalsIgnoreCase(codigoPrestamo)){
 					calcularValor(diasTrasncurridos);
-
-					costo = prestamo3.getValor();
-					JOptionPane.showMessageDialog(null, "El valor del prestamo es: $" + costo);
-
+	
+					costo = prestamo2.getValor();
+					JOptionPane.showMessageDialog(null, "El valor del prestamo es: " + costo);
+	
 					opcion = metodosImpresiones.leerEnteroVentana("Ingrese 1 para confirmar la entrega 2 para rechazar");
-
+	
 					switch (opcion) {
 					case 1:
-						prestamo3 = null;
-						detallePrestamo5 = null;
-						detallePrestamo6 = null;
+						prestamo2 = null;
+						detallePrestamo3 = null;
+						detallePrestamo4 = null;
 						return "eliminado con exito";
-
 					case 2:
 						return "Su prestamo sigue pendiente";
-
+	
 					default:
-
+	
+	
 						return "El prestamo no existe";
-
 					}
 				}else{
-					return "El prestamo no existe";
+					if(prestamo3.getCodigo().equalsIgnoreCase(codigoPrestamo)){
+						calcularValor(diasTrasncurridos);
+	
+						costo = prestamo3.getValor();
+						JOptionPane.showMessageDialog(null, "El valor del prestamo es: $" + costo);
+	
+						opcion = metodosImpresiones.leerEnteroVentana("Ingrese 1 para confirmar la entrega 2 para rechazar");
+	
+						switch (opcion) {
+						case 1:
+							prestamo3 = null;
+							detallePrestamo5 = null;
+							detallePrestamo6 = null;
+							return "eliminado con exito";
+	
+						case 2:
+							return "Su prestamo sigue pendiente";
+	
+						default:
+	
+							return "El prestamo no existe";
+	
+						}
+					}else{
+						return "El prestamo no existe";
+					}
 				}
 			}
+	
 		}
-
-	}
-
-
+		/**
+			* Metod: cantidadPrestamosEmpleado
+			* Responsable: Andres Taborda
+			* @param codigoEmpleado
+			* @return
+			*/
+		public int cantidadPrestamosEmpleado(String codigoEmpleado){
+			int cont = 0;
+			if(prestamo1 != null && prestamo1.getCodigoEmpleado().equalsIgnoreCase(codigoEmpleado)){
+				cont++;
+	
+	
+	
+			}else{
+				if(prestamo2 != null && prestamo2.getCodigoEmpleado().equalsIgnoreCase(codigoEmpleado)){
+					cont++;
+	
+	
+	
+				}else{
+					if(prestamo3 != null && prestamo3.getCodigoEmpleado().equalsIgnoreCase(codigoEmpleado)){
+						cont++;
+	
+	
+	
+					}else{
+						return cont;
+					}
+				}
+			}
+	
+			return cont;
+		}
+		/**
+			* Metod: empleadoUnidadesPrestadas
+			* Responsable: Andres Taborda
+			* @return
+			*/
+		public String empleadoUnidadesPrestadas(){
+	
+			int uniPrestadasPrestamo1 = 0;
+			int uniPrestadasPrestamo2 = 0;
+			int uniPrestadasPrestamo3 = 0;
+			String codigoEmpleado;
+			try{
+				if(detallePrestamo2 != null){
+					uniPrestadasPrestamo1 =  detallePrestamo1.getUnidadesPrestadas() + detallePrestamo2.getUnidadesPrestadas();
+				}
+				else{
+					if(detallePrestamo1 != null){
+					uniPrestadasPrestamo1 = detallePrestamo1.getUnidadesPrestadas();
+					}
+				}
+			}catch (Exception e) {
+				return "1";
+			}
+	
+			try{
+				if(detallePrestamo4 != null){
+					uniPrestadasPrestamo2 =  detallePrestamo3.getUnidadesPrestadas() + detallePrestamo4.getUnidadesPrestadas();
+				}else{
+					if(detallePrestamo3 != null){
+						uniPrestadasPrestamo2 = detallePrestamo3.getUnidadesPrestadas();
+					}
+				}
+			}catch (Exception e) {
+				return "2";
+			}
+	
+			try{
+				if(detallePrestamo6 != null){
+	
+					uniPrestadasPrestamo3 =  detallePrestamo5.getUnidadesPrestadas() + detallePrestamo6.getUnidadesPrestadas();
+				}else{
+					if(detallePrestamo5 != null){
+						uniPrestadasPrestamo3 = detallePrestamo5.getUnidadesPrestadas();
+					}
+				}
+			}
+			catch(Exception e){
+	
+				return "3";
+			}
+	
+	
+			if (uniPrestadasPrestamo1 > uniPrestadasPrestamo2) {
+				if (uniPrestadasPrestamo1 > uniPrestadasPrestamo3) {
+					codigoEmpleado = prestamo1.getCodigoEmpleado();
+					Empleado empleado = obtenerEmpleado(codigoEmpleado);
+					String msg = "El empleado con mas unidades prestadas es: " + empleado + " y tiene una cantidad de: " + uniPrestadasPrestamo1+ " unidades prestadas ";
+					return msg;
+				} else {
+					codigoEmpleado = prestamo3.getCodigoEmpleado();
+					Empleado empleado = obtenerEmpleado(codigoEmpleado);
+					String msg = "El empleado con mas unidades prestadas es: " + empleado + " y tiene una cantidad de: " + uniPrestadasPrestamo3+ " unidades prestadas ";
+					return msg;
+				}
+			} else if (uniPrestadasPrestamo2 > uniPrestadasPrestamo3) {
+				codigoEmpleado = prestamo2.getCodigoEmpleado();
+				Empleado empleado = obtenerEmpleado(codigoEmpleado);
+				String msg = "El empleado con mas unidades prestadas es: " + empleado + " y tiene una cantidad de: " + uniPrestadasPrestamo2+ " unidades prestadas ";
+				return msg;
+			} else {
+				codigoEmpleado = prestamo3.getCodigoEmpleado();
+				Empleado empleado = obtenerEmpleado(codigoEmpleado);
+				String msg = "El empleado con mas unidades prestadas es: " + empleado + " y tiene una cantidad de: " + uniPrestadasPrestamo3+ " unidades prestadas ";
+				return msg;
+			}
+	
+		}
+		/**
+			* Metod: obtenerEmpleado
+			* Responsable: Andres Taborda
+			* @param codigoEmpleado
+			* @return
+			*/
+		public Empleado obtenerEmpleado(String codigoEmpleado){
+			if(empleado1 != null && empleado1.getCodigo().equalsIgnoreCase(codigoEmpleado)){
+				return empleado1;
+			}else{
+				if(empleado2 != null && empleado2.getCodigo().equalsIgnoreCase(codigoEmpleado)){
+					return empleado2;
+				}else{
+					if(empleado3 != null && empleado3.getCodigo().equalsIgnoreCase(codigoEmpleado)){
+						return empleado3;
+					}else{
+						return null;
+					}
+				}
+			}
+	
+	
+		}
+		/**
+			* Metod void: calcularDineroReacudado
+			* Responsable: Andres Taborda
+			*/
+	
+		public void calcularDineroReacudado(){
+	
+			if(prestamo1 != null){
+				dineroRecaudado += prestamo1.getValor();
+			}
+			if(prestamo2 != null){
+				dineroRecaudado += prestamo2.getValor();
+			}
+			if(prestamo3 != null){
+				dineroRecaudado += prestamo3.getValor();
+			}
+	
+		
+		}
+	
+		
 }
+
+
+
+
+	
+
+
 
 
 
